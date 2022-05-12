@@ -1,0 +1,39 @@
+.gameboard-container {
+  padding: 1rem;
+}
+
+.gameboard-player {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(10, auto);
+  grid-gap: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.gameboard-AI {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(10, auto);
+  grid-gap: 0.2rem;
+}
+
+.cell {
+  width: 25px;
+  height: 25px;
+  padding: 0.25rem;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  cursor: pointer;
+  transition: 0.05s;
+
+}
+
+.cell-Human {
+  cursor: cell;
+}
