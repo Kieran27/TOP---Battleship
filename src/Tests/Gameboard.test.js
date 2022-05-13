@@ -46,52 +46,27 @@ test('Ship Overlap Vertical', () => {
 
 test('Attack Hits', () => {
   newGameBoard.placeShip(carrier, 4, 5)
-  expect(newGameBoard.recieveAttack(4, 6)).toBe('Hit! ')
+  expect(newGameBoard.recieveAttack(4, 6)).toBe('Hit!')
 })
-// test('test for board length', () => {
-//   const newGameBoard = new Gameboard;
-//   expect(newGameBoard.board.length).toBe(10)
-// })
-//
-// test('Place Horizontal Ships', () => {
-//   const newGameBoard = new Gameboard;
-//   const testPlaceShips = (ship, x, y) => {
-//     const remainingSpaceX = 10 - y;
-//     const remainingSpaceY = x;
-//
-//     if (ship.length > 10) {
-//       return 'invalid Ship'
-//     }
-//
-//     if (ship.isVertical) {
-//       for (let i = x; i > (x - ship.length); i--) {
-//         newGameBoard.board[i][y].hasShip = ship.id
-//         expect(newGameBoard.board[i][y].hasShip).toEqual(ship.id)
-//       }
-//     } else if (!ship.isVertical) {
-//       for (let i = y; i < (y + ship.length); i++) {
-//         newGameBoard.board[x][i].hasShip = ship.id
-//         expect(newGameBoard.board[x][i].hasShip).toEqual(ship.id)
-//       }
-//     }
-//   }
-//   const testShip1 = new Ship('carrier', 3, true)
-//   const testShip2 = new Ship('destroyer', 3, false)
-//   const testShip3 = new Ship('sub', 5, false)
-//   const testShip4 = new Ship('sub', 11, false)
-//
-//   testPlaceShips(testShip1, 8, 3)
-//   testPlaceShips(testShip2, 8, 3)
-//   testPlaceShips(testShip3, 8, 3)
-// })
-//
-// describe('Placing Invalid Ships', () => {
-//   const newGameBoard = new Gameboard
-//   const testShip = new Ship('sub', 5, false)
-//   const testShip2 = new Ship('sub', 9, false)
-//
-//   test('Place Invalid Ship', () => {
-//     expect(newGameBoard.placeShip(testShip2, 2, 1)).not.toBe('invalid Ship')
-//     expect(newGameBoard.placeShip(testShip, 2, 2 )).toBe('Not Enough Room!')
-//   })
-// });
+
+test('Correct Ship Placement', () => {
+  // Mock Function testing only valid placements
+  const testPlaceShips = (ship, x, y) => {
+    if (ship.isVertical) {
+      for (let i = x; i > (x - ship.length); i--) {
+        newGameBoard.board[i][y].hasShip = ship.id
+        expect(newGameBoard.board[i][y].hasShip).toEqual(ship.id)
+      }
+    } else if (!ship.isVertical) {
+      for (let i = y; i < (y + ship.length); i++) {
+        newGameBoard.board[x][i].hasShip = ship.id
+        expect(newGameBoard.board[x][i].hasShip).toEqual(ship.id)
+      }
+    }
+  }
+// Testing Mock function using valid placements
+testPlaceShips(destroyer, 0, 0)
+testPlaceShips(carrier, 5, 4)
+testPlaceShips(battleship, 5, 4)
+testPlaceShips(submarine, 6, 4)
+})

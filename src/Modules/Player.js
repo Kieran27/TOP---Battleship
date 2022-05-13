@@ -34,6 +34,12 @@ aiPlaceAttack(gameboard) {
     return false
   }
 
+  attackAdjacentSpots(gameboard) {
+    const attacks = this.playerInfo.attacks
+    const previousHit = attacks[attacks.length - 1]
+    return placeAttack()
+  }
+
   getRandomNumber() {
     const randomNumber = Math.floor(Math.random() * 10)
     return randomNumber

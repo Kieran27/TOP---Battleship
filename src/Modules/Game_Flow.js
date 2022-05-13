@@ -40,11 +40,8 @@ const GameFlow = (() => {
     playerGameboard.placeShip(battleship, 5, 9)
     playerGameboard.placeShip(cruiser, 7, 1)
 
-    aiGameboard.placeShip(carrierAI, 9, 9)
-    aiGameboard.placeShip(destroyerAI, 4, 4)
-    aiGameboard.placeShip(submarineAI, 2, 3)
-    aiGameboard.placeShip(battleshipAI, 7, 1)
-    aiGameboard.placeShip(cruiserAI, 8, 5)
+    // Set AI's board by placing ships randomly
+    placeRandomShips(aiGameboard, carrierAI, destroyerAI, submarineAI, battleshipAI, cruiserAI)
 
     // Create Gameboards
     DomFunctions.createBoard(true)
@@ -52,7 +49,7 @@ const GameFlow = (() => {
 
     // Render Player Gameboard
     DomFunctions.renderBoard(playerGameboard)
-    console.log(playerGameboard.board)
+    // console.log(playerGameboard.board)
   }
 
   const cellInput = (e) => {
@@ -91,6 +88,24 @@ const GameFlow = (() => {
     }
     // Return coordinates as object
     return { x, y }
+  }
+
+  const placeRandomShips = (gameboard, ...args) => {
+    const randomNumber = () => player1.getRandomNumber()
+    args.forEach(ship => {
+      const ame = gameboard.placeShip(ship, randomNumber(), randomNumber())
+      console.log(ame)
+      if (ame === 'Invalid Position!') {
+        // console.log('Calli', ship)
+        return placeRandomShips(gameboard, ship)
+      } else if (ame === 'Ship Overflow!') {
+        // console.log('Gura', ship)
+        return placeRandomShips(gameboard, ship)
+      } else if (ame === 'No Ship Overlap!') {
+        // console.log('holo', ship)
+        return placeRandomShips(gameboard, ship)
+      }
+    })
   }
 
   return {

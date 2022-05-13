@@ -1,4 +1,5 @@
 import Ship from '../Modules/Ship.js'
+import Gameboard from '../Modules/GameBoard.js'
 
 describe('Ship Tests', () => {
   let testShip
@@ -20,7 +21,14 @@ describe('Ship Tests', () => {
   })
 
   test('ship is sunk', () => {
+    const newGameBoard = new Gameboard()
+    testShip.hits = ['X', 'X', 'X', 'X', '']
+    expect(testShip.hit(4, newGameBoard)).toBe(testShip.hits)
+  })
+
+  test('All Ships Sunk Called', () => {
+    const newGameBoard = new Gameboard()
     testShip.hits = ['X', 'X', 'X', 'X', 'X']
-    expect(testShip.isSunk()).toBe(`${testShip.id} Sunk!`)
+    expect(testShip.isSunk(newGameBoard)).toBe(newGameBoard.allShipsSunk())
   })
 })

@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     }
@@ -32,6 +33,7 @@
     "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.0.3",
+    "jest-environment-jsdom": "^28.1.0",
     "prettier": "2.6.2",
     "style-loader": "^3.3.1",
     "webpack-cli": "^4.9.2"
