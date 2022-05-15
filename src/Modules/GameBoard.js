@@ -133,11 +133,9 @@ export default class Gameboard {
   }
 
   allShipsSunk () {
-    console.log(this.boardInfo.shipsArray)
     if (this.boardInfo.shipsArray.every(obj => obj.sunk === true)) {
       console.log(`${this.boardInfo.belongsTo} Has Just Lost The Game`)
-      DomFunctions.gameOver()
-      return `${this.boardInfo.belongsTo} Has Just Lost The Game`
+      return true
     }
     return false
   }

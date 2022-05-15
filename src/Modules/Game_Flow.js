@@ -56,25 +56,64 @@ const GameFlow = (() => {
     // Loop Through AI's cells - passing item and index
     document.querySelectorAll('.cell-AI').forEach((cell, index) => {
       if (cell === e.target) {
-        // Remove Cell's event Listener
-        e.target.removeEventListener('click', cellInput)
-        // Convert Index of cell to x and y coordinates
-        const coordinates = getCoordinates(index)
-        // Call attack function based on coordinates
-        player1.placeAttack(coordinates.x, coordinates.y, aiGameboard)
-        // Render change in AI's gameboard
-        DomFunctions.renderBoardAI(aiGameboard)
-        // Call Switch Turns Function - enabling AI to make move - following player's move
-        turnAI()
+        nimiousFunction(e.target, index)
+        // // Remove Cell's event Listener
+        // e.target.removeEventListener('click', cellInput)
+        // // Convert Index of cell to x and y coordinates
+        // const coordinates = getCoordinates(index)
+        // // Call attack function based on coordinates
+        // player1.placeAttack(coordinates.x, coordinates.y, aiGameboard)
+        // // Render change in AI's gameboard
+        // DomFunctions.renderBoardAI(aiGameboard)
+        // // Check for Winner - Exit Function if Winner Found
+        // if (checkForWinner(playerGameboard)) {
+        //   DomFunctions.gameOver()
+        // }
+        // turnAI()
+        // // Call Switch Turns Function - enabling AI to make move - following player's move
       }
     })
   }
 
+  const nimiousFunction = (target, index) => {
+    // Remove Cell's event Listener
+    target.removeEventListener('click', cellInput)
+    // Convert Index of cell to x and y coordinates
+    const coordinates = getCoordinates(index)
+    // Call attack function based on coordinates
+    player1.placeAttack(coordinates.x, coordinates.y, aiGameboard)
+    // Render change in AI's gameboard
+    DomFunctions.renderBoardAI(aiGameboard)
+    // Check for Winner - Exit Function if Winner Found
+    if (checkForWinner(aiGameboard)) {
+      DomFunctions.gameOver()
+      return
+    } else {
+      turnAI()
+    }
+    // Call Switch Turns Function - enabling AI to make move - following player's move
+  }
+
   const turnAI = () => {
+    const attacks = ai.playerInfo.attacks
+    const lastAttack = attacks[attacks.length - 1]
     // Call aiPlaceAttack on AI class
     ai.aiPlaceAttack(playerGameboard)
     // Render changes on player's gameboard
     DomFunctions.renderBoard(playerGameboard)
+    // Check for Winner
+    if (checkForWinner(playerGameboard)) {
+      return DomFunctions.gameOver()
+    }
+  }
+
+  const checkForWinner = (gameboard) => {
+    if (gameboard.allShipsSunk()) {
+      console.log('Winner!')
+      return true
+    } else {
+      return false
+    }
   }
 
   const getCoordinates = (index) => {
@@ -93,16 +132,13 @@ const GameFlow = (() => {
   const placeRandomShips = (gameboard, ...args) => {
     const randomNumber = () => player1.getRandomNumber()
     args.forEach(ship => {
-      const ame = gameboard.placeShip(ship, randomNumber(), randomNumber())
-      console.log(ame)
-      if (ame === 'Invalid Position!') {
-        // console.log('Calli', ship)
+      const shipPlacement = gameboard.placeShip(ship, randomNumber(), randomNumber())
+      // Conditional to recursively call top function until valid placement is chosen
+      if (shipPlacement === 'Invalid Position!') {
         return placeRandomShips(gameboard, ship)
-      } else if (ame === 'Ship Overflow!') {
-        // console.log('Gura', ship)
+      } else if (shipPlacement === 'Ship Overflow!') {
         return placeRandomShips(gameboard, ship)
-      } else if (ame === 'No Ship Overlap!') {
-        // console.log('holo', ship)
+      } else if (shipPlacement === 'No Ship Overlap!') {
         return placeRandomShips(gameboard, ship)
       }
     })
@@ -111,7 +147,8 @@ const GameFlow = (() => {
   return {
     init,
     cellInput,
-    getCoordinates
+    getCoordinates,
+    checkForWinner
   }
 
 })()
