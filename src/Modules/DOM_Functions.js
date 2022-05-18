@@ -3,6 +3,8 @@ const DomFunctions = (() => {
   const player = document.querySelector('.gameboard-player')
   const ai = document.querySelector('.gameboard-AI')
 
+  const announcerTxt = document.getElementById('announcer-txt')
+
   const createBoard = (isHuman) => {
     for (let i = 0; i < 100; i++) {
       const cell = document.createElement('div')
@@ -22,16 +24,11 @@ const DomFunctions = (() => {
         default:
           return undefined
       }
-
-      // if (isHuman) {
-      //   player.appendChild(cell)
-      //   cell.classList.add('cell-Human')
-      // } else {
-      //   ai.appendChild(cell)
-      //   cell.classList.add('cell-AI')
-      //   cell.addEventListener('click', GameFlow.cellInput)
-      // }
     }
+  }
+
+  const renderMessage = (msg) => {
+    announcerTxt.textContent = msg
   }
 
   const renderBoard = (board) => {
@@ -56,27 +53,15 @@ const DomFunctions = (() => {
 
     if (gameboard[x][y].hasShip && gameboard[x][y].hit) {
       cell.style.background = 'red'
+      cell.textContent = 'X'
       return cell
-    } else if (gameboard[x][y].hasShip) {
+    } else if (gameboard[x][y].hasShip && board.boardInfo.belongsTo !== 'computer') {
       cell.style.background = 'green'
       return cell
     } else if (!gameboard[x][y].hasShip && gameboard[x][y].hit) {
-      cell.style.background = 'blue'
+      cell.textContent = '•'
+      cell.style.color = 'black'
       return cell
-    }
-  }
-
-  const updateBoard = (board) => {
-    switch (board) {
-      case 'Hit!':
-        board.innerText = 'X'
-        board.style.color = 'white'
-        break
-      case 'Miss!':
-        board.style.background = 'red'
-        break
-      default:
-        board.style.background = 'inherit'
     }
   }
 
@@ -88,7 +73,7 @@ const DomFunctions = (() => {
 
   return {
     createBoard,
-    updateBoard,
+    renderMessage,
     renderBoard,
     renderBoardAI,
     gameOver

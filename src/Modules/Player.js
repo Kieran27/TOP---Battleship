@@ -21,6 +21,7 @@ aiPlaceAttack(gameboard) {
       return this.aiPlaceAttack(gameboard)
     }
     this.playerInfo.attacks.push([x, y])
+    // this.attackAdjacentSpots()
     return gameboard.recieveAttack(x, y)
   }
 
@@ -34,10 +35,14 @@ aiPlaceAttack(gameboard) {
     return false
   }
 
-  attackAdjacentSpots(gameboard) {
+  attackAdjacentSpots() {
     const attacks = this.playerInfo.attacks
     const previousHit = attacks[attacks.length - 1]
-    return placeAttack()
+    console.log(previousHit)
+    let newAttack = previousHit
+    newAttack[0] = newAttack[0] + 1
+    newAttack[1] = newAttack[1] + 1
+    console.log(newAttack)
   }
 
   getRandomNumber() {

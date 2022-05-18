@@ -1,3 +1,5 @@
+import DomFunctions from './DOM_Functions.js'
+
 export default class Ship {
   constructor(id, length, isVertical) {
     this.id = id
@@ -22,6 +24,7 @@ export default class Ship {
   isSunk(gameboard) {
     if (this.hits.every(value => value === 'X')) {
       console.log(`${gameboard.boardInfo.belongsTo}'s ${this.id} Sunk!`)
+      DomFunctions.renderMessage(`${gameboard.boardInfo.belongsTo}'s ${this.id} Sunk!`)
       this.sunk = true
       return this.sunk
       //
