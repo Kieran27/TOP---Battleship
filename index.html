@@ -14,13 +14,7 @@
 <body>
   <div class="wrapper">
   <header class="header">
-    <div class="header-left">
       <h1>Battleship</h1>
-    </div>
-    <div class="header-right">
-      <button class="btn-rules">Rules ?</button>
-      <button class="btn-reset">Reset Game</button>
-    </div>
   </header>
   <main>
   <div class="announcer-container">
@@ -58,30 +52,32 @@
           <div class="test"></div>
           <div class="test"></div>
         </div>
+        <div class="placement-rotate-container">
+          <button id='btn-rotate' class="btn-rotate">Rotate</button>
+        </div>
       </div>
-      <!-- <div class="ai-graveyard-container">
-
+      <div class="graveyard-container" data-name='graveyard-player' data-owner='player'>
         <h3>Player Graveyard</h4>
         <ul>
-          <li>Carrier(5)</li>
-          <li>Battleship(4)</li>
-          <li>Cruiser(3)</li>
-          <li>Destroyer(3)</li>
-          <li>Submarine(2)</li>
+          <li id='carrier'>Carrier(5)</li>
+          <li id='battleship'>Battleship(4)</li>
+          <li id='cruiser'>Cruiser(3)</li>
+          <li id='destroyer'>Destroyer(3)</li>
+          <li id='submarine'>Submarine(2)</li>
         </ul>
-      </div> -->
+      </div>
     </div>
     <div class="gameboard-ai-container">
-      <div class="gameboard-header">Enemy Fleet</div>
+      <div class="gameboard-header" data-name='ai-header'>Enemy Fleet</div>
       <div class="gameboard-AI"></div>
-      <div class="ai-graveyard-container">
-        <h3>AI Graveyard</h4>
+      <div class="graveyard-container" data-name='graveyard-ai' data-owner='computer'>
+        <h3>AI Graveyard</h3>
         <ul>
-          <li>Carrier(5)</li>
-          <li>Battleship(4)</li>
-          <li>Cruiser(3)</li>
-          <li>Destroyer(3)</li>
-          <li>Submarine(2)</li>
+          <li id='carrier'>Carrier(5)</li>
+          <li id='battleship'>Battleship(4)</li>
+          <li id='cruiser'>Cruiser(3)</li>
+          <li id='destroyer'>Destroyer(3)</li>
+          <li id='submarine'>Submarine(2)</li>
         </ul>
       </div>
     </div>
