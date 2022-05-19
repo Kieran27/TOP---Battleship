@@ -23,8 +23,8 @@ export default class Ship {
 
   isSunk(gameboard) {
     if (this.hits.every(value => value === 'X')) {
-      console.log(`${gameboard.boardInfo.belongsTo}'s ${this.id} Sunk!`)
       DomFunctions.renderMessage(`${gameboard.boardInfo.belongsTo}'s ${this.id} Sunk!`)
+      DomFunctions.updateGraveyard(gameboard, this.id)
       this.sunk = true
       return this.sunk
       //

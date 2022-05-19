@@ -44,7 +44,7 @@ body {
 h1 {
   font-family: var(--Primary-Font);
   color: var(--Clr-Grey-Dark);
-  font-size: 1.625rem;
+  font-size: 2.5rem;
   line-height: 2.375rem;
   font-weight: 700;
 }
@@ -91,7 +91,8 @@ a {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
   align-items: center;
   background: var(--Clr-White-Off);
   padding: 0 4rem;
@@ -100,7 +101,7 @@ a {
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 5rem;
+  padding-top: 7rem;
   flex: 1;
 }
 
@@ -118,10 +119,6 @@ main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /* display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 1rem 3rem; */
 }
 
 .gameboard-header {
@@ -191,23 +188,35 @@ main {
   transition: 0.5s ease;
 }
 
-.ai-graveyard-container {
+.graveyard-container {
   margin-top: 1rem;
   max-width: 500px;
 }
 
-.ai-graveyard-container h3 {
+.graveyard-container h3 {
   margin-left: 40px;
 }
 
-.ai-graveyard-container ul {
+.graveyard-container ul {
   display: flex;
   flex-wrap: wrap;
 }
 
-.ai-graveyard-container li {
+.graveyard-container li {
   list-style-type: none;
   padding: 0 2rem 1rem 0;
+}
+
+[data-name="graveyard-player"] {
+  display: none;
+}
+
+[data-name="graveyard-ai"] {
+  display: none;
+}
+
+[data-name="ai-header"] {
+  display: none;
 }
 
 .footer {
@@ -238,6 +247,35 @@ main {
   width: 35px;
   height: 35px;
   background: red;
+}
+
+.placement-rotate-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-rotate {
+  text-align: center;
+}
+
+/* Utility Clasess for JS Implementation */
+.strikethrough {
+  text-decoration: line-through;
+  color: pink;
+}
+
+.toggle-display {
+  display: block;
+}
+
+.rotate {
+  display: block;
+}
+
+.rotate-padding {
+  margin-right: 0;
+  margin-bottom: 0.2rem;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -271,7 +309,26 @@ main {
 }
 
 @media only screen and (max-width: 400px) {
+  .wrapper {
+    display: flex;
+    min-height: calc(100vh);
+    flex-direction: column;
+  }
+
   .cell {
+    width: 30px;
+    height: 30px;
+  }
+
+  .announcer-container {
+    width: 80%;
+    display: flex;
+    text-align: center;
+    margin-left: 2.5rem;
+    justify-content: center;
+  }
+
+  .test {
     width: 30px;
     height: 30px;
   }

@@ -109,7 +109,7 @@ export default class Gameboard {
         count++
       }
     }
-    return this.board
+    return true
   }
 
   recieveAttack (x, y) {

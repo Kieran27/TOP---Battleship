@@ -5,6 +5,8 @@ import GameFlow from './Game_Flow.js'
 const DragandDrop = (() => {
   // Initialise Counter to track valid placed ships
   let shipPlacementCount = 0
+  // Add Event Listeners Allowing for 'ships' to be Rotated
+  document.getElementById('btn-rotate').addEventListener('click', DomFunctions.rotateShips)
   // Add initial drag events to 'ships'
   const dragDropInit = (gameboard) => {
     document.querySelectorAll('.test-ship').forEach(ship => {
@@ -13,14 +15,12 @@ const DragandDrop = (() => {
     })
 
     function dragStart(e) {
-      console.log('I Am being dragged')
       DomFunctions.renderMessage(`Place Your ${e.target.getAttribute('data-name')}`)
       e.dataTransfer.setData('text/plain', e.target.getAttribute('data-name'))
     }
 
     function dragEnd() {
       DomFunctions.renderMessage('Place Your Remaining Ships')
-      console.log('Drag Has been ended')
     }
 
     document.querySelectorAll('.cell-Human').forEach((cell, index) => {
@@ -42,6 +42,14 @@ const DragandDrop = (() => {
       console.log('I have left the stratosphere')
     }
 
+    function determineShipDirection(direction) {
+      if (direction === 'horizontal') {
+        return false
+      } else {
+        return true
+      }
+    }
+
     function dragDrop(e) {
       const target = e.target
       const shipID = e.dataTransfer.getData('text/plain')
@@ -53,14 +61,24 @@ const DragandDrop = (() => {
 
       document.querySelectorAll('.cell-Human').forEach((cell, index) => {
         if (cell === target) {
+          // Determine x and y coordinates from cell index
           const coordinates = GameFlow.getCoordinates(index)
-          const newShip = new Ship(elementID, elementLength, false)
-          gameboard.placeShip(newShip, coordinates.x, coordinates.y)
-          shipPlacementCount++
-          DomFunctions.renderBoard(gameboard)
-          // if (shipPlacementCount === 5) {
-          //   GameFlow.initAI()
-          // }
+          // Instantiate new Ship with values obtained by dataTransfer
+          const newShip = new Ship(elementID, elementLength, determineShipDirection(elementDirection))
+          // Place Ship on gameboard with coordinates chosen by user
+          const placement = gameboard.placeShip(newShip, coordinates.x, coordinates.y)
+          // If placement was valid - update and render new gameboard state to user
+          if (placement === true) {
+            element.remove()
+            shipPlacementCount++
+            DomFunctions.renderBoard(gameboard)
+            // Initialises AI player and board once all ships are placed
+            if (shipPlacementCount === 5) {
+              GameFlow.initAI()
+              DomFunctions.displayUIElements()
+              DomFunctions.renderMessage('Make Your Move')
+            }
+          }
         }
       })
     }

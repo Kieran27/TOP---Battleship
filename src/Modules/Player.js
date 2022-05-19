@@ -21,7 +21,6 @@ aiPlaceAttack(gameboard) {
       return this.aiPlaceAttack(gameboard)
     }
     this.playerInfo.attacks.push([x, y])
-    // this.attackAdjacentSpots()
     return gameboard.recieveAttack(x, y)
   }
 

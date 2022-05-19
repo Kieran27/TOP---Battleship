@@ -14,65 +14,31 @@ const GameFlow = (() => {
   const init = () => {
     // Create Players
     player1 = new Player('player', 'human')
-    ai = new Player('computer', 'AI')
-
     // Create Gameboards
     playerGameboard = new Gameboard(player1.name)
-    aiGameboard = new Gameboard(ai.name)
-
-    // Create Player Ships
-    // const carrier = new Ship('carrier', 5, true)
-    // const battleship = new Ship('battleship', 4, true)
-    // const cruiser = new Ship('cruiser', 3, true)
-    // const submarine = new Ship ('submarine', 3, false)
-    // const destroyer = new Ship ('destroyer', 2, false)
-
-    // Create AI Ships
-    const carrierAI = new Ship('carrier', 5, true)
-    const battleshipAI = new Ship('battleship', 4, true)
-    const cruiserAI = new Ship('cruiser', 3, true)
-    const submarineAI = new Ship ('submarine', 3, false)
-    const destroyerAI = new Ship ('destroyer', 2, false)
-
-    // PlaceShips
-    // playerGameboard.placeShip(carrier, 7, 7)
-    // playerGameboard.placeShip(destroyer, 4, 4)
-    // playerGameboard.placeShip(submarine, 2, 4)
-    // playerGameboard.placeShip(battleship, 5, 9)
-    // playerGameboard.placeShip(cruiser, 7, 1)
-
-    // Set AI's board by placing ships randomly
-    placeRandomShips(aiGameboard, carrierAI, destroyerAI, submarineAI, battleshipAI, cruiserAI)
-
     // Create Gameboards
     DomFunctions.createBoard(true)
-    DomFunctions.createBoard(false)
-
     // Initialise Drag And Drop Functionality
     DragandDrop.dragDropInit(playerGameboard)
-
     // Render Player Gameboard
     DomFunctions.renderBoard(playerGameboard)
     // console.log(playerGameboard.board)
   }
 
   const initAI = () => {
-    // Create Players
+    // Create AI Player
     ai = new Player('computer', 'AI')
-
-    // Create Gameboards
+    // Create Gameboard
     aiGameboard = new Gameboard(ai.name)
-
     // Create AI Ships
     const carrierAI = new Ship('carrier', 5, true)
     const battleshipAI = new Ship('battleship', 4, true)
     const cruiserAI = new Ship('cruiser', 3, true)
     const submarineAI = new Ship ('submarine', 3, false)
     const destroyerAI = new Ship ('destroyer', 2, false)
-
+    // Create and render aiGameboard
     DomFunctions.createBoard(false)
     DomFunctions.renderBoard(aiGameboard)
-
     // Set AI's board by placing ships randomly
     placeRandomShips(aiGameboard, carrierAI, destroyerAI, submarineAI, battleshipAI, cruiserAI)
   }
@@ -97,7 +63,7 @@ const GameFlow = (() => {
     DomFunctions.renderBoardAI(aiGameboard)
     // Check for Winner - Exit Function if Winner Found
     if (checkForWinner(aiGameboard)) {
-      DomFunctions.gameOver()
+      DomFunctions.gameOver(aiGameboard)
       return
     } else {
       turnAI()
@@ -114,7 +80,7 @@ const GameFlow = (() => {
     DomFunctions.renderBoard(playerGameboard)
     // Check for Winner
     if (checkForWinner(playerGameboard)) {
-      return DomFunctions.gameOver()
+      return DomFunctions.gameOver(playerGameboard)
     }
   }
 

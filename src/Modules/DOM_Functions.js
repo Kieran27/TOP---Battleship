@@ -2,7 +2,6 @@ import GameFlow from '../Modules/Game_Flow.js'
 const DomFunctions = (() => {
   const player = document.querySelector('.gameboard-player')
   const ai = document.querySelector('.gameboard-AI')
-
   const announcerTxt = document.getElementById('announcer-txt')
 
   const createBoard = (isHuman) => {
@@ -65,10 +64,43 @@ const DomFunctions = (() => {
     }
   }
 
-  const gameOver = () => {
+  const displayUIElements = () => {
+    const playerPlacement = document.querySelector('.player-placement-container')
+    const aiHeader = document.querySelector("[data-name='ai-header']")
+    const playerGraveyard = document.querySelector("[data-name='graveyard-player']")
+    const aiGraveyard = document.querySelector("[data-name='graveyard-ai']")
+
+    aiHeader.classList.toggle('toggle-display')
+    playerGraveyard.classList.toggle('toggle-display')
+    aiGraveyard.classList.toggle('toggle-display')
+
+    playerPlacement.remove()
+  }
+
+  const rotateShips = () => {
+    document.querySelectorAll('.test-ship').forEach(ship => {
+      ship.classList.toggle('rotate')
+      ship.dataset.direction === 'horizontal'
+        ? ship.dataset.direction = 'vertical'
+        : ship.dataset.direction = 'horizontal'
+      console.log(ship.dataset.direction)
+    })
+    document.querySelectorAll('.test').forEach(ship => {
+      ship.classList.toggle('rotate-padding')
+    })
+  }
+
+  const updateGraveyard = (gameboard, shipID) => {
+    const owner = gameboard.boardInfo.belongsTo
+    const dataOwner = document.querySelector(`[data-owner=${owner}]`)
+    dataOwner.querySelector(`#${shipID}`).classList.toggle('strikethrough')
+  }
+
+  const gameOver = (gameboard) => {
     document.querySelectorAll('.cell-AI').forEach(cell => {
       cell.removeEventListener('click', GameFlow.cellInput)
     })
+    renderMessage(`${gameboard.boardInfo.belongsTo} Has Lost The Game!`)
   }
 
   return {
@@ -76,6 +108,9 @@ const DomFunctions = (() => {
     renderMessage,
     renderBoard,
     renderBoardAI,
+    displayUIElements,
+    rotateShips,
+    updateGraveyard,
     gameOver
   }
 })()
