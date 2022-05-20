@@ -41,6 +41,8 @@ const GameFlow = (() => {
     DomFunctions.renderBoard(aiGameboard)
     // Set AI's board by placing ships randomly
     placeRandomShips(aiGameboard, carrierAI, destroyerAI, submarineAI, battleshipAI, cruiserAI)
+
+    DomFunctions.renderMessage('Make Your Move!')
   }
 
   const cellInput = (e) => {

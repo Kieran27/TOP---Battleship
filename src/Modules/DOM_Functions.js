@@ -64,17 +64,23 @@ const DomFunctions = (() => {
     }
   }
 
-  const displayUIElements = () => {
+  const initUIElements = () => {
+    const playerContainer = document.querySelector('.gameboard-player-container')
+    const aiContainer = document.querySelector('.gameboard-ai-container')
     const playerPlacement = document.querySelector('.player-placement-container')
+    const rotateContainer = document.querySelector("[data-name='rotate-container']")
     const aiHeader = document.querySelector("[data-name='ai-header']")
     const playerGraveyard = document.querySelector("[data-name='graveyard-player']")
     const aiGraveyard = document.querySelector("[data-name='graveyard-ai']")
 
+    playerContainer.classList.toggle('player-gameboard-init')
+    aiContainer.classList.toggle('ai-gameboard-init')
     aiHeader.classList.toggle('toggle-display')
     playerGraveyard.classList.toggle('toggle-display')
     aiGraveyard.classList.toggle('toggle-display')
 
     playerPlacement.remove()
+    rotateContainer.remove()
   }
 
   const rotateShips = () => {
@@ -83,7 +89,6 @@ const DomFunctions = (() => {
       ship.dataset.direction === 'horizontal'
         ? ship.dataset.direction = 'vertical'
         : ship.dataset.direction = 'horizontal'
-      console.log(ship.dataset.direction)
     })
     document.querySelectorAll('.test').forEach(ship => {
       ship.classList.toggle('rotate-padding')
@@ -100,7 +105,7 @@ const DomFunctions = (() => {
     document.querySelectorAll('.cell-AI').forEach(cell => {
       cell.removeEventListener('click', GameFlow.cellInput)
     })
-    renderMessage(`${gameboard.boardInfo.belongsTo} Has Lost The Game!`)
+    renderMessage(`Game Over! ${gameboard.boardInfo.belongsTo} Has Lost The Game!`)
   }
 
   return {
@@ -108,7 +113,7 @@ const DomFunctions = (() => {
     renderMessage,
     renderBoard,
     renderBoardAI,
-    displayUIElements,
+    initUIElements,
     rotateShips,
     updateGraveyard,
     gameOver
