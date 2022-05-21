@@ -338,8 +338,8 @@ main {
 
 @media only screen and (max-width: 510px) {
 
-.header, .footer {
-  padding: 0 1.7rem;
+ .footer {
+  padding: 0 1.5rem;
 }
 
 }
@@ -368,6 +368,18 @@ main {
     width: 30px;
     height: 30px;
   }
+
+  .player-gameboard-init {
+    padding: 0 0.75rem;
+  }
+
+  .ai-gameboard-init {
+    padding: 0 0.75rem;
+  }
+
+  /* .graveyard-container {
+    display: none;
+  } */
 
   .ai-graveyard-container h3 {
     margin-left: 20px;
