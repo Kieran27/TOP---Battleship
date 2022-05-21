@@ -220,6 +220,11 @@ main {
   display: none;
 }
 
+[data-name="ai-header-mobile"] {
+  display: none;
+  margin-top: 2rem;
+}
+
 .footer {
   display: flex;
   align-items: center;
@@ -342,6 +347,14 @@ main {
   padding: 0 1.5rem;
 }
 
+.player-gameboard-init {
+  padding: 0 1rem;
+}
+
+.ai-gameboard-init {
+  padding: 0 1rem;
+}
+
 }
 
 @media only screen and (max-width: 400px) {
@@ -364,6 +377,15 @@ main {
     justify-content: center;
   }
 
+  [data-name="ai-header"] {
+    display: none;
+  }
+
+  [data-name="ai-header-mobile"] {
+    display: block;
+    margin-top: 2rem;
+  }
+
   .test {
     width: 30px;
     height: 30px;
@@ -371,15 +393,17 @@ main {
 
   .player-gameboard-init {
     padding: 0 0.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .ai-gameboard-init {
     padding: 0 0.75rem;
+    margin-bottom: 1.5rem;
   }
 
-  /* .graveyard-container {
+  .graveyard-container {
     display: none;
-  } */
+  }
 
   .ai-graveyard-container h3 {
     margin-left: 20px;
